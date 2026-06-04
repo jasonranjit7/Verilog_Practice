@@ -1,13 +1,15 @@
-module half_adder(input a,
-                  input b,
-                  output cout,
-                  output sum);
+//module half_adder(input a,
+ //                 input b,
+ //                 output cout,
+//                  output sum);
   
-  xor(sum,a,b);
-  and(cout,a,b);
+//  xor(sum,a,b);
+ // and(cout,a,b);
   
-endmodule
+//endmodule
 
+
+`include "../008_Half_Adder/design.v"
 module full_adder(input a,
                   input b,
                   input cin,
