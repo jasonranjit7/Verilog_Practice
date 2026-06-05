@@ -7,44 +7,44 @@
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/vhdl_textio.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/v2005_math.vpi";
 :vpi_module "/usr/lib/x86_64-linux-gnu/ivl/va_math.vpi";
-S_0x565543546240 .scope module, "OR_tb" "OR_tb" 2 1;
+S_0x55a93e323240 .scope module, "XOR_tb" "XOR_tb" 2 1;
  .timescale 0 0;
-v0x5655435580c0_0 .var "a", 0 0;
-v0x565543558190_0 .var "b", 0 0;
-v0x565543558260_0 .net "y", 0 0, L_0x565543558360;  1 drivers
-S_0x5655435463d0 .scope module, "DUT" "OR_Gate" 2 5, 3 1 0, S_0x565543546240;
+v0x55a93e3350c0_0 .var "a", 0 0;
+v0x55a93e335190_0 .var "b", 0 0;
+v0x55a93e335260_0 .net "y", 0 0, L_0x55a93e335360;  1 drivers
+S_0x55a93e3233d0 .scope module, "DUT" "XOR_Gate" 2 5, 3 1 0, S_0x55a93e323240;
  .timescale 0 0;
     .port_info 0 /INPUT 1 "a";
     .port_info 1 /INPUT 1 "b";
     .port_info 2 /OUTPUT 1 "y";
-L_0x565543558360 .functor OR 1, v0x5655435580c0_0, v0x565543558190_0, C4<0>, C4<0>;
-v0x565543546600_0 .net "a", 0 0, v0x5655435580c0_0;  1 drivers
-v0x565543557ee0_0 .net "b", 0 0, v0x565543558190_0;  1 drivers
-v0x565543557fa0_0 .net "y", 0 0, L_0x565543558360;  alias, 1 drivers
-    .scope S_0x565543546240;
+L_0x55a93e335360 .functor XOR 1, v0x55a93e3350c0_0, v0x55a93e335190_0, C4<0>, C4<0>;
+v0x55a93e323600_0 .net "a", 0 0, v0x55a93e3350c0_0;  1 drivers
+v0x55a93e334ee0_0 .net "b", 0 0, v0x55a93e335190_0;  1 drivers
+v0x55a93e334fa0_0 .net "y", 0 0, L_0x55a93e335360;  alias, 1 drivers
+    .scope S_0x55a93e323240;
 T_0 ;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x5655435580c0_0, 0, 1;
+    %store/vec4 v0x55a93e3350c0_0, 0, 1;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x565543558190_0, 0, 1;
+    %store/vec4 v0x55a93e335190_0, 0, 1;
     %vpi_call 2 12 "$dumpfile", "image.vcd" {0 0 0};
     %vpi_call 2 13 "$dumpvars", 32'sb00000000000000000000000000000000 {0 0 0};
-    %vpi_call 2 14 "$monitor", "a = %b, b = %b, y = %b", v0x5655435580c0_0, v0x565543558190_0, v0x565543558260_0 {0 0 0};
+    %vpi_call 2 14 "$monitor", "a = %b, b = %b, y = %b", v0x55a93e3350c0_0, v0x55a93e335190_0, v0x55a93e335260_0 {0 0 0};
     %delay 10, 0;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x5655435580c0_0, 0, 1;
+    %store/vec4 v0x55a93e3350c0_0, 0, 1;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x565543558190_0, 0, 1;
+    %store/vec4 v0x55a93e335190_0, 0, 1;
     %delay 10, 0;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x5655435580c0_0, 0, 1;
+    %store/vec4 v0x55a93e3350c0_0, 0, 1;
     %pushi/vec4 0, 0, 1;
-    %store/vec4 v0x565543558190_0, 0, 1;
+    %store/vec4 v0x55a93e335190_0, 0, 1;
     %delay 10, 0;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x5655435580c0_0, 0, 1;
+    %store/vec4 v0x55a93e3350c0_0, 0, 1;
     %pushi/vec4 1, 0, 1;
-    %store/vec4 v0x565543558190_0, 0, 1;
+    %store/vec4 v0x55a93e335190_0, 0, 1;
     %delay 10, 0;
     %vpi_call 2 18 "$finish" {0 0 0};
     %end;

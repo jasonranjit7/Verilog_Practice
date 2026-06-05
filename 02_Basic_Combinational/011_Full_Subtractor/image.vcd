@@ -1,0 +1,94 @@
+$date
+	Thu Jun  4 02:03:43 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module full_sub_tb $end
+$var wire 1 ! diff $end
+$var wire 1 " bout $end
+$var reg 1 # bin $end
+$var reg 1 $ x $end
+$var reg 1 % y $end
+$scope module fa $end
+$var wire 1 # bin $end
+$var wire 1 " bout $end
+$var wire 1 $ x $end
+$var wire 1 % y $end
+$var wire 1 ! diff $end
+$var wire 1 & d1 $end
+$var wire 1 ' bout2 $end
+$var wire 1 ( bout1 $end
+$scope module sub_1 $end
+$var wire 1 ( bout $end
+$var wire 1 & diff $end
+$var wire 1 ) not_x $end
+$var wire 1 $ x $end
+$var wire 1 % y $end
+$upscope $end
+$scope module sub_2 $end
+$var wire 1 ' bout $end
+$var wire 1 ! diff $end
+$var wire 1 * not_x $end
+$var wire 1 & x $end
+$var wire 1 # y $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#10
+$dumpvars
+1*
+1)
+0(
+0'
+0&
+0%
+0$
+0#
+0"
+0!
+$end
+#20
+1"
+1!
+1'
+1#
+#30
+0*
+0'
+1&
+1(
+0#
+1%
+#40
+0!
+1#
+#50
+0"
+1!
+0(
+0)
+0#
+0%
+1$
+#60
+0!
+1#
+#70
+1*
+0&
+0#
+1%
+#80
+1"
+1!
+1'
+1#
+#90

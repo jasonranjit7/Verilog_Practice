@@ -1,5 +1,5 @@
 $date
-	Thu Jun  4 02:49:47 2026
+	Thu Jun  4 02:49:51 2026
 $end
 $version
 	Icarus Verilog
@@ -7,7 +7,7 @@ $end
 $timescale
 	1s
 $end
-$scope module NAND_tb $end
+$scope module XNOR_tb $end
 $var wire 1 ! y $end
 $var reg 1 " a $end
 $var reg 1 # b $end
@@ -28,11 +28,12 @@ $dumpvars
 1!
 $end
 #10
+0!
 1#
 #20
 0#
 1"
 #30
-0!
+1!
 1#
 #40
