@@ -4,8 +4,8 @@ module mod_5_counter(input clk,
   
   always@(posedge clk or posedge rst)
     begin
-      if(rst |  count == 4'd4)
-        count <= 4'd0;
+      if(rst |  count == 3'd4)
+        count <= 3'd0;
       else
         count <= count + 1;
     end
