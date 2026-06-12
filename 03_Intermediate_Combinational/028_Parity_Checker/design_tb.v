@@ -19,13 +19,13 @@ module parity_checker_tb();
       even_odd = e_o;
       p = pa;
       #10
-      $display("input = %b, even/odd = %b, paritybit = %b, checker bit  = %b",a,pa,e_o,c);
+      $display("input = %b, even/odd = %b, paritybit = %b, checker bit  = %b",a,e_o,pa,c);
     end
   endtask
   
   initial begin
     $dumpfile("image.vcd");
-    $dumpvars(0);
+    $dumpvars(0,parity_checker_tb);
     run(4'd15, 1'b1, $random);
     run($random, $random, $random);
     run($random, $random, $random);
