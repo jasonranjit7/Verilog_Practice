@@ -86,11 +86,16 @@ module tb_traffic_light();
         $display(" ");
       $display("Regular timed Run");
       rst();
-      wait_state(0);
-      wait_state(6);
-      wait_state(2);
-      wait_state(4);
-      wait_state(0);
+      wait(DUT.state==0);
+      display();
+      wait(DUT.state==6);
+      display();
+      wait(DUT.state==2);
+      display();
+      wait(DUT.state==4);
+      display();
+      wait(DUT.state==0);
+      display();
     end
   endtask
         
@@ -139,7 +144,6 @@ module tb_traffic_light();
   initial begin
     $dumpfile("image.vcd");
     $dumpvars(0,tb_traffic_light.DUT);
-    reset = 0;
     E = 0; E_R = 0; pri_E = 0;
     W = 0; W_R = 0; pri_W = 0;
     N = 0; N_R = 0; pri_N = 0;

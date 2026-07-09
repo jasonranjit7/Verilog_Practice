@@ -38,6 +38,8 @@ module traffic_light(input clk,
   reg [3:0] count;
   reg c,r,pri;
   
+  
+  
   always@(posedge clk) begin
     if(reset)
       count<=0;
@@ -45,10 +47,9 @@ module traffic_light(input clk,
       count<=count+1;
       if(r)
         count<=0;
-      if(pri)
-        count<=5'd30;
     end
   end
+    
   
   always@(*) begin
     nxt_state = state;
@@ -62,25 +63,16 @@ module traffic_light(input clk,
           nxt_state = EAST_R;
         end
         else if(pri_W) begin
-          pri=1;
-          if(count!=15)
-            nxt_state=EAST;
-          else
-            nxt_state = WEST_R;
+          r=1;
+          nxt_state = WEST_R;
         end
         else if(pri_N) begin
-          pri=1;
-          if(count!=15)
-            nxt_state=EAST;
-          else
-            nxt_state = NORTH_R;
+          r=1;
+          nxt_state = NORTH_R;
         end
         else if(pri_S) begin
-          pri=1;
-          if(count!=15)
-            nxt_state=EAST;
-          else
-            nxt_state = SOUTH_R;
+          r=1;
+          nxt_state = SOUTH_R;
         end
         else begin
           if(!E &!E_R && count<7) begin
@@ -101,17 +93,19 @@ module traffic_light(input clk,
           else if(count==5 && E_R)
             nxt_state=EAST_R;
           else if(count==15) begin
-            $display("loop1");
+            //$display("loop1");
             nxt_state = SOUTH;
           end
-          else begin;
+          else begin
             nxt_state = EAST;
           end
         end
       end
       
+      
       EAST_R: begin
-        r=0;
+        if(!pri_E)
+          r=0;
         if(pri_W) begin
           pri=1;
           if(count!=15)
@@ -174,6 +168,7 @@ module traffic_light(input clk,
             nxt_state = NORTH_R;
         end
         else if(pri_E) begin
+          
           pri=1;
           if(count!=15)
             nxt_state=SOUTH;
@@ -199,7 +194,7 @@ module traffic_light(input clk,
           else if(count==7 && S_R)
             nxt_state=SOUTH_R;
           else if(count==15) begin
-            $display("loop2");
+            //$display("loop2");
             nxt_state = WEST;
           end
           else begin;
@@ -209,7 +204,8 @@ module traffic_light(input clk,
       end
       
       SOUTH_R: begin
-        r=0;
+        if(!pri_S)
+          r=0;
         if(pri_W) begin
           pri=1;
           if(count!=15)
@@ -297,7 +293,7 @@ module traffic_light(input clk,
           else if(count==5 && W_R)
             nxt_state=W_R;
           else if(count==15) begin
-            $display("loop1");
+            //$display("loop1");
             nxt_state = NORTH;
           end
           else begin;
@@ -307,7 +303,8 @@ module traffic_light(input clk,
       end
       
       WEST_R: begin
-        r=0;
+        if(!pri_W)
+          r=0;
         if(pri_N) begin
           pri=1;
           if(count!=15)
@@ -395,7 +392,7 @@ module traffic_light(input clk,
           else if(count==5 && N_R)
             nxt_state=N_R;
           else if(count==15) begin
-            $display("loop1");
+            //$display("loop1");
             nxt_state = EAST;
           end
           else begin;
@@ -405,7 +402,8 @@ module traffic_light(input clk,
       end
       
       NORTH_R: begin
-        r=0;
+        if(!pri_N)
+          r=0;
         if(pri_W) begin
           pri=1;
           if(count!=15)
@@ -455,50 +453,64 @@ module traffic_light(input clk,
   
   //output logic
   always@(*) begin
-    light_E = 0;
-    light_W = 0;
-    light_N = 0;
-    light_S = 0;
+    light_E = 4;
+    light_W = 4;
+    light_N = 4;
+    light_S = 4;
     ped_light_EW = 0;
     case(state)
       EAST: begin
         light_E[1] = 1'b1;
+        light_E[3] = 0;
         light_W[1]=1'b1;
+        light_W[3] = 0;
         ped_light_EW = 1'b1;
       end
       EAST_R: begin
         light_E[1] = 1'b1;
+        light_E[3] = 0;
         light_E_R = 1'b1;
       end
       SOUTH: begin
         light_S[1] = 1'b1;
+        light_S[3] = 0;
         light_N[1] = 1'b1;
+        light_N[3] = 0;
         ped_light_NS = 1'b1;
       end
       NORTH_R: begin
         light_N[1] = 1'b1;
+        light_N[3] = 0;
         light_N_R = 1'b1;
       end
       WEST: begin
         light_W[1] = 1'b1;
+        light_W[3] =0;
         light_E[1] = 1'b1;
+        light_E[3] = 0;
         ped_light_EW = 1'b1;
       end
       WEST_R: begin
         light_W[1] = 1'b1;
+        light_W[3] = 0;
         light_W_R = 1'b1;
       end
       SOUTH: begin
         light_S[1] = 1'b1;
+        light_S[3] = 0;
         light_N[1] = 1'b1;
+        light_N[3] = 0;
         ped_light_NS = 1'b1;
       end
       SOUTH_R: begin
         light_S[1] = 1'b1;
+        light_S[3] = 0;
         light_S_R = 1'b1;
       end
     endcase
   end
+  
+  
         
   
 endmodule
