@@ -19,9 +19,10 @@ module tb_traffic_light();
   task rst;
     begin
       $display("Reset");
-      repeat(1)@(posedge clk);            
+      repeat(1)@(negedge clk);            
       reset = 1;     
-      repeat(4)@(posedge clk);  
+      repeat(4)@(posedge clk);
+      repeat(1)@(negedge clk); 
       reset = 0;     
       repeat(1)@(posedge clk);  
     end
@@ -69,14 +70,6 @@ module tb_traffic_light();
         $display("light South = %b, ped light = %d,right turn South = %b",
                  light_S, ped_light_NS,light_S_R);  
       end
-    end
-  endtask
-  
-  task wait_state;
-    input s;
-    begin
-      wait(DUT.state==s);
-      display();
     end
   endtask
   
@@ -138,19 +131,71 @@ module tb_traffic_light();
       display();
     end
   endtask
+  
+  
+  task pri_on;
+    input [1:0] D;
+    begin
+      @(negedge clk);
+      if(D==0)
+        pri_E=1'b1;
+      else if(D==1)
+        pri_W=1'b1;
+      else if(D==2)
+        pri_S=1'b1;
+      else if(D==3)
+        pri_N=1'b1;
+      @(posedge clk);
+    end
+  endtask
+  
+  task pri_off;
+    input [1:0] D;
+    begin
+      @(negedge clk);
+      if(D==0)
+        pri_E=1'b0;
+      else if(D==1)
+        pri_W=1'b0;
+      else if(D==2)
+        pri_S=1'b0;
+      else if(D==3)
+        pri_N=1'b0;
+      @(posedge clk);
+    end
+  endtask
+  
+  task pri_run;
+    begin
+      rst();
+      repeat(3)
+        $display(" ");
+      $display("Priority green for South ");
+      pri_on(2);
+      
+      wait(DUT.state==0);
+      display();
+      @(posedge clk);
+      pri_off(2);
+      wait(DUT.state==7);
+      display();
+    end
+  endtask
       
         
   
   initial begin
-    $dumpfile("image.vcd");
-    $dumpvars(0,tb_traffic_light.DUT);
     E = 0; E_R = 0; pri_E = 0;
     W = 0; W_R = 0; pri_W = 0;
     N = 0; N_R = 0; pri_N = 0;
     S = 0; S_R = 0; pri_S = 0;
+    $dumpfile("image.vcd");
+    $dumpvars(0,tb_traffic_light.DUT);
+    //$monitor("state = %d", DUT.state);
     
     regular_run();
     run_with_right();
+    pri_run();
     $finish();
   end
 endmodule
